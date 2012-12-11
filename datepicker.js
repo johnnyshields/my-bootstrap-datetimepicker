@@ -228,6 +228,11 @@
 			return false;
 		},
 
+        amend: function(options) {
+            if (options.format) this.format = options.format;
+            this.setValue();
+        },
+
 	};
 
 	$.fn.datepicker = function ( option ) {
@@ -237,7 +242,9 @@
 				options = typeof option == 'object' && option;
 			if (!data) {
 				$this.data('datepicker', (data = new Datepicker(this, $.extend({}, $.fn.datepicker.defaults,options))));
-			}
+			} else {
+                if (typeof option == 'object') data.amend(option);
+            }
 			if (typeof option == 'string') data[option]();
 		});
 	};
